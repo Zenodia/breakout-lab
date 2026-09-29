@@ -15,9 +15,9 @@ def strip_think_tags(text: str) -> str:
 #  model="nvidia/llama-3.3-nemotron-super-49b-v1.5",
 
 llm= ChatNVIDIA(model="nvidia/llama-3.3-nemotron-super-49b-v1.5")
-#    model="nvidia/llama-3.2-nemoretriever-300m-embed-v1",
+#    model="nvidia/llama-3.2-nemoretriever-300m-embed-v1",  # EOL 2026-05-18, replaced below
 
-embed = NVIDIAEmbeddings(model="nvidia/llama-3.2-nemoretriever-300m-embed-v1",truncate="NONE",)
+embed = NVIDIAEmbeddings(model="nvidia/nemotron-3-embed-1b",truncate="NONE",)
 if os.getenv("stream") :
     stream_flag = os.getenv("stream")
     if stream_flag.lower()=="yes":

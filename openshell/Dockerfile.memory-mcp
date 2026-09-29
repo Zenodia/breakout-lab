@@ -20,7 +20,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
         python-dotenv \
         nest_asyncio \
         colorama \
-        langchain-core \
+        "langchain==0.3.7" \
+        "langchain-core==0.3.63" \
         langgraph \
         langchain-community \
         langchain-nvidia-ai-endpoints
