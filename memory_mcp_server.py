@@ -4,20 +4,23 @@ from langchain_core.runnables import  RunnablePassthrough
 import os
 import re
 import nest_asyncio, asyncio
-from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings, NVIDIARerank
+from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings, NVIDIARerank
+from langchain_openai import ChatOpenAI
 from utils import MemoryOps
 import os
 from colorama import Fore
-load_dotenv()
+load_dotenv('/workspace/.env', override=True)
 
 def strip_think_tags(text: str) -> str:
     return re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL).strip()
-#  model="nvidia/llama-3.3-nemotron-super-49b-v1.5",
 
-llm= ChatNVIDIA(model="nvidia/llama-3.3-nemotron-super-49b-v1.5")
-#    model="nvidia/llama-3.2-nemoretriever-300m-embed-v1",  # EOL 2026-05-18, replaced below
+llm = ChatOpenAI(
+    model="meta/llama-3.2-11b-vision-instruct",
+    base_url="https://integrate.api.nvidia.com/v1",
+    api_key=os.environ.get("NVIDIA_API_KEY"),
+)
 
-embed = NVIDIAEmbeddings(model="nvidia/nemotron-3-embed-1b",truncate="NONE",)
+embed = NVIDIAEmbeddings(model="nvidia/nemotron-3-embed-1b", truncate="NONE")
 if os.getenv("stream") :
     stream_flag = os.getenv("stream")
     if stream_flag.lower()=="yes":

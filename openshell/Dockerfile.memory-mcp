@@ -24,7 +24,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
         "langchain-core==0.3.63" \
         langgraph \
         langchain-community \
-        langchain-nvidia-ai-endpoints
+        langchain-nvidia-ai-endpoints \
+        langchain-openai
 
 EXPOSE 8999
 
